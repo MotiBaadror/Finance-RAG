@@ -54,9 +54,9 @@ def get_nodeids_from_index(index):
     return docwise_nodeids
 
 def get_document_from_index(index):
-    node_id = get_nodeids_from_index(index)[0][0]
-    d = Document(text=index.docstore.get_document(node_id).get_content())
-    return [d]
+    node_ids = get_nodeids_from_index(index)[0]
+    documents = [Document(text=index.docstore.get_document(node_id).get_content()) for node_id in node_ids]
+    return documents
 
 def get_recursive_query_engine(documents):
     node_parser = MarkdownElementNodeParser(llm=Settings.llm, num_workers=4)
@@ -68,3 +68,9 @@ def get_recursive_query_engine(documents):
         similarity_top_k=5, llm=Settings.llm
     )
     return recursive_query_engine
+
+def  persist_storage(storage_path, index):
+    # PERSIST_DIR = add_rootpath(storage_path)
+    index.storage_context.persist(persist_dir=storage_path)
+
+

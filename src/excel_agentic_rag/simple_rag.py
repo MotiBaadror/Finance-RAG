@@ -4,8 +4,8 @@ from components.set_llm import set_llm
 from dto.configs import QueryConfig
 
 if __name__ == '__main__':
-    config = QueryConfig(model_name='llama3.1')
-    set_llm(model=config.model_name)
+    config = QueryConfig(model_name='llama3.2', temperature=0)
+    set_llm(model=config.model_name, temperature=config.temperature)
 
     index = get_index(config.storage_path, config.data_path, use_llamaparse=True)
 

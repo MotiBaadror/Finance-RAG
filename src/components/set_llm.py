@@ -3,9 +3,9 @@ from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.ollama import Ollama
 
 
-def set_llm(model='tinyllama'):
+def set_llm(model='llama3.2',temperature=0.75):
     print(f'Setting LLM model: {model}')
-    Settings.llm = Ollama(model=model)
+    Settings.llm = Ollama(model=model, temperature=temperature)
 
     Settings.embed_model = OllamaEmbedding(
         model_name=model,
@@ -14,3 +14,6 @@ def set_llm(model='tinyllama'):
     )
     print(Settings.llm.complete('Hi, How are you?'))
 
+# if __name__ == '__main__':
+#     set_llm()
+#     Settings.llm.generate('Hi, I am good')

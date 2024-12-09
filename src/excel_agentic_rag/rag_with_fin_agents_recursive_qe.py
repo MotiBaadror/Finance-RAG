@@ -10,8 +10,8 @@ def build_agent():
     """
     :return: agent with defined tool and storage loaded in the indextool
     """
-    config = QueryConfig(model_name='llama3.1')
-    set_llm(model=config.model_name)
+    config = QueryConfig(model_name='llama3.2', temperature=0)
+    set_llm(model=config.model_name, temperature=config.temperature)
 
     index = get_index(config.storage_path ,config.data_path, use_llamaparse=True)
 
